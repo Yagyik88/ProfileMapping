@@ -1,21 +1,38 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { ProfilesProvider } from './context/ProfilesContext';
+import { useState } from 'react';
+import { profiles as initialProfiles } from './data/profiles';
 import HomePage from './pages/HomePage';
-import ProfileDetailsPage from './pages/ProfileDetailsPage';
 import AdminPage from './pages/AdminPage';
-import NotFoundPage from './pages/NotFoundPage';
+import './styles/App.css';
 
 function App() {
+  const [allProfiles, setAllProfiles] = useState(initialProfiles);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  // Admin functions
+  const addProfile = (newProfile) => {
+    const id = allProfiles.length + 1;
+    setAllProfiles([...allProfiles, { ...newProfile, id }]);
+  };
+
+  const deleteProfile = (id) => {
+    setAllProfiles(allProfiles.filter(profile => profile.id !== id));
+  };
+
   return (
-    <ProfilesProvider>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/profile/:id" element={<ProfileDetailsPage />} />
-        <Route path="/admin" element={<AdminPage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </ProfilesProvider>
+    <div className="app">
+      <button 
+        onClick={() => setIsAdmin(!isAdmin)} 
+        className="admin-toggle"
+      >
+        {isAdmin ? "Exit Admin" : "Admin Mode"}
+      </button>
+      
+      {isAdmin ? (
+        <AdminPage onAddProfile={addProfile} />
+      ) : (
+        <HomePage profiles={allProfiles} onDelete={deleteProfile} />
+      )}
+    </div>
   );
 }
 

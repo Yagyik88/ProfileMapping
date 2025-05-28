@@ -1,13 +1,13 @@
-// src/components/SearchFilter.jsx
-const SearchFilter = ({ searchTerm, setSearchTerm }) => {
+const SearchFilter = ({ searchTerm, onSearchChange }) => {
   return (
-    <input
-      type="text"
-      placeholder="Search profiles by name..."
-      value={searchTerm}
-      onChange={e => setSearchTerm(e.target.value)}
-      style={{ width: "100%", padding: "0.5rem", marginBottom: "1rem" }}
-    />
+    <div className="search-filter">
+      <input
+        type="text"
+        placeholder="Search by name or city..."
+        value={searchTerm}
+        onChange={(e) => onSearchChange(e.target.value)}
+      />
+    </div>
   );
 };
 

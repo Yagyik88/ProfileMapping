@@ -1,16 +1,23 @@
-// src/pages/HomePage.jsx
-import React, { useState } from "react";
-import ProfileList from "../components/ProfileList";
-import SearchFilter from "../components/SearchFilter";
+import { useState } from 'react';
+import ProfileList from '../components/ProfileList';
+import SearchFilter from '../components/SearchFilter';
+import '../styles/component-styles.css';
 
-const HomePage = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+const HomePage = ({ profiles, onDelete }) => {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const filteredProfiles = profiles.filter(profile =>
+    profile.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    profile.city.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
-    <div style={{ maxWidth: "900px", margin: "2rem auto", padding: "0 1rem" }}>
-      <h1>User Profiles</h1>
-      <SearchFilter searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      <ProfileList searchTerm={searchTerm} />
+    <div className="home-page">
+      <SearchFilter 
+        searchTerm={searchTerm} 
+        onSearchChange={setSearchTerm} 
+      />
+      <ProfileList profiles={filteredProfiles} onDelete={onDelete} />
     </div>
   );
 };

@@ -1,35 +1,33 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { useState } from 'react';
+import MapComponent from './MapComponent';
+import '../styles/component-styles.css';
 
-const ProfileCard = ({ profile, onSummaryClick }) => {
+const ProfileCard = ({ profile, onDelete }) => {
+  const [showMap, setShowMap] = useState(false);
+
   return (
     <div className="profile-card">
-      <Link to={`/profile/${profile.id}`} className="profile-link">
-        <img
-          src={profile.photo}
-          alt={profile.name}
-          className="profile-image"
-          onError={(e) => {
-            e.target.src = "https://via.placeholder.com/150";
-          }}
-        />
-        <div className="profile-info">
-          <h3 className="profile-name">{profile.name}</h3>
-          <p className="profile-profession">{profile.profession}</p>
-          <p className="profile-location">
-            {profile.address.city}, {profile.address.country}
-          </p>
-        </div>
-      </Link>
-      <button
-        className="summary-button"
-        onClick={(e) => {
-          e.preventDefault();
-          onSummaryClick(profile);
-        }}
-      >
-        View on Map
-      </button>
+      <img src={profile.photo} alt={profile.name} className="profile-img" />
+      <div className="profile-info">
+        <h3>{profile.name}</h3>
+        <p>{profile.profession}</p>
+        <p>{profile.city}</p>
+      </div>
+      <div className="profile-actions">
+        <button 
+          onClick={() => setShowMap(!showMap)}
+          className="map-btn"
+        >
+          {showMap ? "Hide Map" : "View Location"}
+        </button>
+        <button 
+          onClick={() => onDelete(profile.id)}
+          className="delete-btn"
+        >
+          Delete
+        </button>
+      </div>
+      {showMap && <MapComponent location={profile.location} />}
     </div>
   );
 };
