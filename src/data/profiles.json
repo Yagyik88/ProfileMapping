@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "name": "Alice Johnson",
+    "age": 28,
+    "profession": "Software Engineer",
+    "description": "A passionate developer from New York.",
+    "photo": "https://via.placeholder.com/150",
+    "address": {
+      "street": "123 Main St",
+      "city": "New York",
+      "state": "NY",
+      "zipcode": "10001",
+      "latitude": 40.7128,
+      "longitude": -74.0060
+    }
+  },
+  {
+    "id": 2,
+    "name": "Bob Smith",
+    "age": 34,
+    "profession": "UX Designer",
+    "description": "Design enthusiast from San Francisco.",
+    "photo": "https://via.placeholder.com/150",
+    "address": {
+      "street": "456 Market St",
+      "city": "San Francisco",
+      "state": "CA",
+      "zipcode": "94111",
+      "latitude": 37.7749,
+      "longitude": -122.4194
+    }
+  }
+]
