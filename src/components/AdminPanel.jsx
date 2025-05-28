@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { ProfilesContext } from "../context/ProfilesContext";
 
-const AdminPage = () => {
+const AdminPanel = () => {
   const { profiles, setProfiles } = useContext(ProfilesContext);
   const [formData, setFormData] = useState({
     id: "",
@@ -90,16 +90,16 @@ const AdminPage = () => {
   };
 
   return (
-    <div style={{ maxWidth: 600, margin: "2rem auto", padding: "0 1rem" }}>
-      <h1>Admin Panel</h1>
-      <form onSubmit={handleSubmit} style={{ marginBottom: "2rem" }}>
+    <div className="container my-5" style={{ maxWidth: 700 }}>
+      <h1 className="mb-4">Admin Panel</h1>
+      <form onSubmit={handleSubmit} className="mb-5">
         <input
           name="name"
           placeholder="Name"
           value={formData.name}
           onChange={handleInputChange}
           required
-          style={{ display: "block", marginBottom: 8, width: "100%", padding: 8 }}
+          className="form-control mb-3"
         />
         <input
           name="age"
@@ -107,61 +107,66 @@ const AdminPage = () => {
           placeholder="Age"
           value={formData.age}
           onChange={handleInputChange}
-          style={{ display: "block", marginBottom: 8, width: "100%", padding: 8 }}
+          className="form-control mb-3"
         />
         <input
           name="profession"
           placeholder="Profession"
           value={formData.profession}
           onChange={handleInputChange}
-          style={{ display: "block", marginBottom: 8, width: "100%", padding: 8 }}
+          className="form-control mb-3"
         />
         <input
           name="city"
           placeholder="City"
           value={formData.city}
           onChange={handleInputChange}
-          style={{ display: "block", marginBottom: 8, width: "100%", padding: 8 }}
+          className="form-control mb-3"
         />
         <input
           name="imageUrl"
           placeholder="Photo URL"
           value={formData.imageUrl}
           onChange={handleInputChange}
-          style={{ display: "block", marginBottom: 8, width: "100%", padding: 8 }}
+          className="form-control mb-3"
         />
         <textarea
           name="description"
           placeholder="Description"
           value={formData.description}
           onChange={handleInputChange}
-          style={{ display: "block", marginBottom: 8, width: "100%", padding: 8 }}
+          className="form-control mb-3"
         />
-        <button type="submit">{editingId ? "Update" : "Add"} Profile</button>
-        {editingId && <button type="button" onClick={resetForm} style={{ marginLeft: 10 }}>Cancel</button>}
+        <button type="submit" className="btn btn-primary me-2">
+          {editingId ? "Update" : "Add"} Profile
+        </button>
+        {editingId && (
+          <button type="button" onClick={resetForm} className="btn btn-secondary">
+            Cancel
+          </button>
+        )}
       </form>
 
-      <h2>Existing Profiles</h2>
+      <h2 className="mb-3">Existing Profiles</h2>
       {profiles.length === 0 && <p>No profiles available.</p>}
       {profiles.map((profile) => (
         <div
           key={profile.id}
-          style={{
-            border: "1px solid #ccc",
-            padding: "1rem",
-            marginBottom: "1rem",
-            borderRadius: 8,
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
+          className="card mb-3 d-flex flex-row justify-content-between align-items-center p-3"
         >
-          <span>{profile.name}</span>
           <div>
-            <button onClick={() => handleEdit(profile)} style={{ marginRight: 10 }}>
+            <strong>{profile.name}</strong>
+          </div>
+          <div>
+            <button
+              onClick={() => handleEdit(profile)}
+              className="btn btn-sm btn-warning me-2"
+            >
               Edit
             </button>
-            <button onClick={() => handleDelete(profile.id)}>Delete</button>
+            <button onClick={() => handleDelete(profile.id)} className="btn btn-sm btn-danger">
+              Delete
+            </button>
           </div>
         </div>
       ))}
@@ -169,4 +174,4 @@ const AdminPage = () => {
   );
 };
 
-export default AdminPage;
+export default AdminPanel;

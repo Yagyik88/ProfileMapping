@@ -19,11 +19,6 @@ const ProfileDetailsPage = () => {
       </div>
     );
   }
-  <MapComponent 
-  latitude={profile.address.latitude}
-  longitude={profile.address.longitude}
-  address={`${profile.address.street}, ${profile.address.city}`}
-/>
 
   return (
     <div className="profile-details-container">
@@ -32,8 +27,8 @@ const ProfileDetailsPage = () => {
       </button>
 
       <div className="profile-header">
-        <img 
-          src={profile.photo} 
+        <img
+          src={profile.photo || "https://via.placeholder.com/150"}
           alt={profile.name}
           className="profile-image"
           onError={(e) => {

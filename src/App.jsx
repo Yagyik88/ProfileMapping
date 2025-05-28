@@ -1,39 +1,55 @@
-import { useState } from 'react';
-import { profiles as initialProfiles } from './data/profiles';
-import HomePage from './pages/HomePage';
-import AdminPage from './pages/AdminPage';
-import './styles/App.css';
+import React, { useState } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import { ProfilesContext } from "./context/ProfilesContext";
+import { profiles as initialProfiles } from "./data/profiles";
+import HomePage from "./pages/HomePage";
+import AdminPage from "./pages/AdminPage";
+import "./styles/App.css";
 
 function App() {
   const [allProfiles, setAllProfiles] = useState(initialProfiles);
+
+  return (
+    <ProfilesContext.Provider value={{ profiles: allProfiles, setProfiles: setAllProfiles }}>
+      <div className="app">
+        <Routes>
+          <Route path="/" element={<HomeWrapper />} />
+          <Route path="/admin" element={<AdminPage />} />
+        </Routes>
+      </div>
+    </ProfilesContext.Provider>
+  );
+}
+
+const HomeWrapper = () => {
+  const navigate = useNavigate();
   const [isAdmin, setIsAdmin] = useState(false);
+  const { profiles, setProfiles } = React.useContext(ProfilesContext);
 
-  // Admin functions
-  const addProfile = (newProfile) => {
-    const id = allProfiles.length + 1;
-    setAllProfiles([...allProfiles, { ...newProfile, id }]);
-  };
-
-  const deleteProfile = (id) => {
-    setAllProfiles(allProfiles.filter(profile => profile.id !== id));
+  const handleDelete = (id) => {
+    setProfiles(profiles.filter(profile => profile.id !== id));
   };
 
   return (
-    <div className="app">
-      <button 
-        onClick={() => setIsAdmin(!isAdmin)} 
+    <>
+      <button
+        onClick={() => {
+          if (isAdmin) {
+            setIsAdmin(false);
+            navigate("/");
+          } else {
+            setIsAdmin(true);
+            navigate("/admin");
+          }
+        }}
         className="admin-toggle"
       >
         {isAdmin ? "Exit Admin" : "Admin Mode"}
       </button>
-      
-      {isAdmin ? (
-        <AdminPage onAddProfile={addProfile} />
-      ) : (
-        <HomePage profiles={allProfiles} onDelete={deleteProfile} />
-      )}
-    </div>
+
+      <HomePage profiles={profiles} onDelete={handleDelete} />
+    </>
   );
-}
+};
 
 export default App;

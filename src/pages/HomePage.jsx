@@ -1,23 +1,29 @@
 import { useState } from 'react';
-import ProfileList from '../components/ProfileList';
-import SearchFilter from '../components/SearchFilter';
-import '../styles/component-styles.css';
+import ProfileCard from '../components/ProfileCard';
+import ProfileSummary from '../components/ProfileSummary';
 
 const HomePage = ({ profiles, onDelete }) => {
-  const [searchTerm, setSearchTerm] = useState('');
-
-  const filteredProfiles = profiles.filter(profile =>
-    profile.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    profile.city.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const [selectedProfile, setSelectedProfile] = useState(null);
 
   return (
     <div className="home-page">
-      <SearchFilter 
-        searchTerm={searchTerm} 
-        onSearchChange={setSearchTerm} 
-      />
-      <ProfileList profiles={filteredProfiles} onDelete={onDelete} />
+      {selectedProfile ? (
+        <ProfileSummary
+          profile={selectedProfile}
+          onBack={() => setSelectedProfile(null)}
+        />
+      ) : (
+        <div className="profile-list grid gap-4 p-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          {profiles.map(profile => (
+            <ProfileCard
+              key={profile.id}
+              profile={profile}
+              onDelete={onDelete}
+              onViewSummary={setSelectedProfile}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

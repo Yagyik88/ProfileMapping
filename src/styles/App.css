@@ -40,3 +40,94 @@ button {
 .back-button:hover {
   background-color: #e0e0e0;
 }                                                                         
+.admin-toggle {
+  margin: 20px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #343a40;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.admin-toggle:hover {
+  background-color: #212529;
+}
+/* Global styles */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f6f8;
+  color: #333;
+}
+
+.app {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Admin toggle button */
+.admin-toggle {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.admin-toggle:hover {
+  background-color: #0056b3;
+}
+
+/* Profile card container */
+.profile-card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  margin: 10px;
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Grid for profile cards */
+.profile-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* Buttons inside cards */
+.profile-card button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  background-color: #dc3545;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.profile-card button:hover {
+  background-color: #a71d2a;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .profile-card {
+    width: 100%;
+  }
+
+  .app {
+    padding: 10px;
+  }
+}

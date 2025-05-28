@@ -2,15 +2,27 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border-radius: 8px;
 }
 
 .back-button {
-  background: #f0f0f0;
+  background: #007BFF;
+  color: #fff;
   border: none;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1.2rem;
   margin-bottom: 2rem;
   cursor: pointer;
   border-radius: 4px;
+  transition: background-color 0.3s ease;
+  font-weight: 600;
+}
+
+.back-button:hover {
+  background: #0056b3;
 }
 
 .profile-header {
@@ -25,6 +37,19 @@
   height: 150px;
   border-radius: 50%;
   object-fit: cover;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+.profile-info h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.profession, .location {
+  margin: 0.25rem 0;
+  color: #555;
+  font-style: italic;
 }
 
 .profile-content {
@@ -33,12 +58,30 @@
   gap: 2rem;
 }
 
+.profile-about h2,
+.profile-map h2 {
+  margin-top: 0;
+  border-bottom: 2px solid #007BFF;
+  padding-bottom: 0.3rem;
+  margin-bottom: 1rem;
+  color: #007BFF;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  font-weight: 500;
+}
+
 .not-found {
   text-align: center;
   padding: 2rem;
+  font-size: 1.25rem;
+  color: #777;
 }
 
-/* Add responsive design */
+/* Responsive */
 @media (max-width: 768px) {
   .profile-content {
     grid-template-columns: 1fr;
@@ -47,5 +90,9 @@
   .profile-header {
     flex-direction: column;
     text-align: center;
+  }
+
+  .details-grid {
+    grid-template-columns: 1fr;
   }
 }
